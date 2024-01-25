@@ -21,9 +21,35 @@ def print_system_information():
     print(f"Uptime: {days} days, {hour:02}:{mins:02}:{sec:02}")
 
 
+def print_cpu_information():
+    print("\nCPU Usage Per Core")
+    for i, (percent, freq) in enumerate(zip(cpu_percent, cpu_freq), start=True):
+        print(f"Core {i}: {percent}% \nFrequency: {freq.current} MHz")
+
+
+def print_virtual_memory_information():
+    print(f"\nVirtual Memory")
+    print(f"Total: {virtual_mem.total / (1024 ** 3):.2f} GB")
+    print(f"Used: {virtual_mem.used / (1024 ** 3):.2f} GB")
+    print(f"Swap Total: {swap.total / (1024 ** 3):.2f} GB")
+    print(f"Swap Used: {swap.used / (1024 ** 3):.2f} GB")
+
+
+def print_disk_information():
+    print(f"\nDisk Information")
+    print(f"Total Disk Information: {disk.total / (1024 ** 3):.2f} GB")
+    print(f"Used Disk Space: {disk.used / (1024 ** 3):.2f} GB")
+    print(f"Free Disk Space: {disk.free / (1024 ** 3):.2f} GB")
+
+
 def main():
     print_separator()
     print_system_information()
+    print_cpu_information()
+    print_separator()
+    print_virtual_memory_information()
+    print_separator()
+    print_disk_information()
 
 
 if __name__ == "__main__":
