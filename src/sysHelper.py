@@ -106,7 +106,6 @@ def print_battery_information():
         print("\nBattery Information Unavailable")
 
 
-
 def main():
     print_separator()
     print_system_information()
