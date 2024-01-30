@@ -73,6 +73,39 @@ def print_battery_information():
     except AttributeError:
         print("\nTemperature Unavailable")
 
+    c = wmi.WMI()
+    t = wmi.WMI(moniker='//.root/wmi')
+
+    batts1 = c.CIM_Battery(Caption='Portable Battery')
+    for i, b in enumerate(batts1):
+        print('Battery %d Design Capacity: %d mWh' % (i, b.DesignCapacity or 0))
+
+    batts = t.ExecQuery('Select * from BatteryFullChargedCapacity')
+    for i, b in enumerate(batts):
+        print('Battery %d Fully Charged Capacity: %d mWh' % (i, b.FullChargedCapacity))
+
+    batts = t.ExecQuery('Select * from BatteryStatus where Voltage > 0')
+    for i, b in enumerate(batts):
+        print('\nTag:               ' + str(b.Tag))
+        print('Name:                ' + b.InstanceName)
+        print('PowerOnline:         ' + str(b.PowerOnline))
+        print('Discharging:         ' + str(b.Discharging))
+        print('Charging:            ' + str(b.Charging))
+        print('Voltage:             ' + str(b.Voltage))
+        print('DischargeRate:       ' + str(b.DischargeRate))
+        print('ChargeRate:          ' + str(b.ChargeRate))
+        print('RemainingCapacity:   ' + str(b.RemainingCapacity))
+        print('Active:              ' + str(b.Active))
+        print('Critical:            ' + str(b.Critical))
+
+    battery = psutil.sensors_battery()
+    if battery:
+        plugged = "Plugged In" if battery.power_plugged else "Not Plugged In"
+        print(f"\nBattery StatusL {plugged}, {battery.percent}%")
+    else:
+        print("\nBattery Information Unavailable")
+
+
 
 def main():
     print_separator()
@@ -84,6 +117,8 @@ def main():
     print_disk_information()
     print_separator()
     print_network_information()
+    print_separator()
+    print_battery_information()
 
 
 if __name__ == "__main__":
