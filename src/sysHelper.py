@@ -59,6 +59,21 @@ def print_network_information():
     print(devices)
 
 
+def print_battery_information():
+    print("\nBattery Information ")
+    try:
+        temperatures = psutil.sensors_temperatures()
+        if temperatures:
+            print("\nTemperatures: ")
+            for name, entries in temperatures.items():
+                for entry in entries:
+                    print(f"{name}: {entry.current}°C")
+        else:
+            print("\nTemperature Unavailable")
+    except AttributeError:
+        print("\nTemperature Unavailable")
+
+
 def main():
     print_separator()
     print_system_information()
