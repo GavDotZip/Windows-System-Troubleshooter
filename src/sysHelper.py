@@ -1,4 +1,8 @@
 import ctypes
+import re
+import socket
+import subprocess
+import uuid
 from datetime import datetime
 import platform
 import psutil
@@ -42,6 +46,19 @@ def print_disk_information():
     print(f"Free Disk Space: {disk.free / (1024 ** 3):.2f} GB")
 
 
+def print_network_information():
+    devices = subprocess.check_output(['netsh', 'wlan', 'show', 'network'])
+    devices = devices.decode('ascii')
+    devices = devices.replace("\r", "")
+    network = psutil.net_io_counters()
+    print("\nNetwork Information\n ")
+    print("IP Address: ", socket.gethostbyname(socket.gethostname()))
+    print(f"MAC Address: {':'.join(re.findall('..', '%012x' % uuid.getnode()))}")
+    print(f"Bytes Received: {network.bytes_recv / (1024 ** 2):.2f} MB")
+    print(f"Bytes Sent: {network.bytes_sent / (1024 ** 2):.2f} MB")
+    print(devices)
+
+
 def main():
     print_separator()
     print_system_information()
@@ -50,6 +67,8 @@ def main():
     print_virtual_memory_information()
     print_separator()
     print_disk_information()
+    print_separator()
+    print_network_information()
 
 
 if __name__ == "__main__":
