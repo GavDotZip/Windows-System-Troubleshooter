@@ -1,0 +1,8 @@
+TO EXPORT .PY TO .EXE
+
+In terminal navigate to where the .py file in question is.
+Enter the following command into the terminal:
+    pyinstaller NAMEOFPY.py --onefile
+
+--onefile >> your project packaged into ONE file
+--noconsole >> no console appear when your app is running
