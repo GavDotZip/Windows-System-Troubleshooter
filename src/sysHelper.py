@@ -1,4 +1,5 @@
 import ctypes
+import os
 import re
 import socket
 import subprocess
@@ -74,7 +75,7 @@ def print_battery_information():
         print("\nTemperature Unavailable")
 
     c = wmi.WMI()
-    t = wmi.WMI(moniker='//.root/wmi')
+    t = wmi.WMI(moniker="//.root/wmi")
 
     batts1 = c.CIM_Battery(Caption='Portable Battery')
     for i, b in enumerate(batts1):
@@ -105,6 +106,32 @@ def print_battery_information():
     else:
         print("\nBattery Information Unavailable")
 
+
+def open_troubleshooting_tools():
+    print("Select the following for tools:\n"
+          "1 - Devices and Printers\n"
+          "2 - System Properties\n"
+          "3 - Task Manager\n"
+          "4 - Device Manager\n"
+          "5 - Task Scheduler\n"
+          "Enter 'exit' to close the program")
+    while True:
+        user_options = input("\nSelect an Option: ")
+
+        if user_options.lower() == 'exit':
+            print("Shutting down...")
+            break
+        elif user_options == '1':
+            print("Devices and Printers...")
+            os.system('control /name Microsoft.DevicesAndPrinters')
+        elif user_options == '2':
+            print("System Properties...")
+        elif user_options == '1':
+            print("")
+        elif user_options == '1':
+            print("")
+        elif user_options == '1':
+            print("")
 
 def main():
     print_separator()
