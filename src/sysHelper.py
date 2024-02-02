@@ -126,12 +126,16 @@ def open_troubleshooting_tools():
             os.system('control /name Microsoft.DevicesAndPrinters')
         elif user_options == '2':
             print("System Properties...")
-        elif user_options == '1':
-            print("")
-        elif user_options == '1':
-            print("")
-        elif user_options == '1':
-            print("")
+            os.system('start sysdm.cpl')
+        elif user_options == '3':
+            print("Task Manager...")
+            os.system('start taskmgr.exe')
+        elif user_options == '4':
+            print("Device Manager...")
+            os.system('start devmgmt.msc')
+        elif user_options == '5':
+            print("Task Scheduler...")
+            os.system('start taskschd.msc')
 
 def main():
     print_separator()
