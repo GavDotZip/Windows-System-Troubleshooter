@@ -9,11 +9,11 @@ import platform
 import psutil
 import wmi
 
-
+# Function to print a separator line for better output readability
 def print_separator():
     print("\n", "-" * 100)
 
-
+# Function to print system information
 def print_system_information():
     print(f"\nSystem: {uname.system}")
     print(f"Device Name: {uname.node}")
@@ -25,13 +25,13 @@ def print_system_information():
     print(f"Boot Time: {bt.day}/{bt.month}/{bt.year} {bt.hour}:{bt.minute}:{bt.second}")
     print(f"Uptime: {days} days, {hour:02}:{mins:02}:{sec:02}")
 
-
+# Function to print CPU information
 def print_cpu_information():
     print("\nCPU Usage Per Core")
     for i, (percent, freq) in enumerate(zip(cpu_percent, cpu_freq), start=True):
         print(f"Core {i}: {percent}% \nFrequency: {freq.current} MHz")
 
-
+# Function to print virtual memory information
 def print_virtual_memory_information():
     print(f"\nVirtual Memory")
     print(f"Total: {virtual_mem.total / (1024 ** 3):.2f} GB")
@@ -39,14 +39,14 @@ def print_virtual_memory_information():
     print(f"Swap Total: {swap.total / (1024 ** 3):.2f} GB")
     print(f"Swap Used: {swap.used / (1024 ** 3):.2f} GB")
 
-
+# Function to print disk information
 def print_disk_information():
     print(f"\nDisk Information")
     print(f"Total Disk Information: {disk.total / (1024 ** 3):.2f} GB")
     print(f"Used Disk Space: {disk.used / (1024 ** 3):.2f} GB")
     print(f"Free Disk Space: {disk.free / (1024 ** 3):.2f} GB")
 
-
+# Function to print network information
 def print_network_information():
     devices = subprocess.check_output(['netsh', 'wlan', 'show', 'network'])
     devices = devices.decode('ascii')
@@ -59,7 +59,7 @@ def print_network_information():
     print(f"Bytes Sent: {network.bytes_sent / (1024 ** 2):.2f} MB")
     print(devices)
 
-
+# Function to print battery information
 def print_battery_information():
     print("\nBattery Information ")
     try:
@@ -106,7 +106,7 @@ def print_battery_information():
     else:
         print("\nBattery Information Unavailable")
 
-
+# Function to open troubleshooting tools based on user input
 def open_troubleshooting_tools():
     print("Select the following for tools:\n"
           "1 - Devices and Printers\n"
@@ -137,7 +137,7 @@ def open_troubleshooting_tools():
             print("Task Scheduler...")
             os.system('start taskschd.msc')
 
-
+# Main function to execute the script
 def main():
     print_separator()
     print_system_information()
@@ -153,9 +153,9 @@ def main():
     print_separator()
     open_troubleshooting_tools()
 
-
+# Entry point for script execution
 if __name__ == "__main__":
-    # Script execution starts here
+    # Initialize variables and gather system information
     cpu_percent = psutil.cpu_percent(interval=1, percpu=True)
     cpu_freq = psutil.cpu_freq(percpu=True)
     uname = platform.uname()
@@ -176,4 +176,5 @@ if __name__ == "__main__":
 
     disk = psutil.disk_usage('/')
 
+    # Execute the main function
     main()
