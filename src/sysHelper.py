@@ -149,6 +149,8 @@ def main():
     print_network_information()
     print_separator()
     print_battery_information()
+    print_separator()
+    open_troubleshooting_tools()
 
 
 if __name__ == "__main__":
