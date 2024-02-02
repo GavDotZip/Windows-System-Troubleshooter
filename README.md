@@ -2,6 +2,7 @@ A Python-based desktop application for Windows users to troubleshoot some issues
 See requirements.txt for dependencies.
 
 Features
+
 System Information: Display basic system details, including device name, serial number, Windows version, etc.
 CPU Information: Show CPU usage per core and frequency.
 Memory Information: Present virtual memory and swap usage.
@@ -11,6 +12,7 @@ Battery Information: Provide details on battery status, temperatures, and capaci
 Troubleshooting Tools: Open various Windows troubleshooting tools from the script.
 
 Contributing
+
 Contributions are welcome! If you have suggestions, improvements, or bug fixes, feel free to open an issue or create a pull request.
 
 Motivator
