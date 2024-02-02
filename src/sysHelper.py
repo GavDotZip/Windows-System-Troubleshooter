@@ -137,6 +137,7 @@ def open_troubleshooting_tools():
             print("Task Scheduler...")
             os.system('start taskschd.msc')
 
+
 def main():
     print_separator()
     print_system_information()
